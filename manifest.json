@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Pipe Message",
+  "version": "1.0",
+  "author": "Simon Anders",
+  "description": "Pipes a message to an external command.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "pipe-message@simon-anders"
+    }
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "message_display_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+    "permissions": [
+        "messagesRead",
+        "nativeMessaging"
+    ],  
+  "icons": {
+    "48": "icon.png"
+  }
+}
