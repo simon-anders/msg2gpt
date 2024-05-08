@@ -7,6 +7,5 @@ browser.runtime.onMessage.addListener((message) => {
         }
     });
 
-
 	port.postMessage( message );
 });

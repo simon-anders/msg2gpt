@@ -11,6 +11,9 @@ user will send you the text of an email they have received and that contains inf
 event that they wish to offer to their calender. You should reply with a JSON object that is 
 suitable for upload with Google's API. 
 
+Make sure your answer is a bare JSON object, without surrounding punctuation like backticks --
+so that you reply can be directly passed to a JSOM parser.
+
 When writing the description, please rephrase and summarize the mail suitably to three or four 
 sentences. Remove redundant information that is available in other fields of the JSON structure.
 For the summary, include a, possibly shortened, title or the topic in case of seminars.
@@ -18,6 +21,13 @@ For the summary, include a, possibly shortened, title or the topic in case of se
 Unless the mail specifies otherwise, assume Europe/Berlin time.
 
 The JSON event object must not include an invitation of attendees.
+
+Add the end of the summary, add a line like "created from e-mail mid:<message-id>", replacing
+<message-id> with the specified message ID.
+
+If the message does not contain text describing an event, or if you cannot produce a suitable
+event as JSON object for soem reason, do not return a JSON object. Instead, start your reply 
+with the string "ERROR" (as very first word in all caps) and then explain the problem.
 """
 
 def write_to_calendar( raw_msg ):
@@ -28,6 +38,7 @@ def write_to_calendar( raw_msg ):
 		To: {msg['to']} 
 		Subject: {msg['subject']}
 		Date: {msg['date']}
+		Message-Id: {msg['message-id']} 
 
 		{body}
 		""" ).format( msg=msg, body=body )
@@ -44,7 +55,10 @@ def write_to_calendar( raw_msg ):
     	model="gpt-3.5-turbo",
 	)		
 	reply = chat_completion.choices[0].message.content
-	event = json.loads( reply )
+	try:
+		event = json.loads( reply )
+	except Exception as e:
+		raise RuntimeError( "gpt replied: " + reply )
 	add_event_to_calendar( event )
 
 
