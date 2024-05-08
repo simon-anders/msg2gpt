@@ -6,7 +6,7 @@
   "description": "Pipes a message to an external command.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "pipe-message@simon-anders"
+      "id": "pipe-message@sanders-muc"
     }
   },
   "background": {

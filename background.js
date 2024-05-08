@@ -1,7 +1,12 @@
 browser.runtime.onMessage.addListener((message) => {
-	console.log( "9" );
-	console.log( message );
-	
-	let port = browser.runtime.connectNative( "process_message.simon_anders" );
+	let port = browser.runtime.connectNative( "process_message.pipe_message" );
+
+    port.onDisconnect.addListener(() => {
+        if (port.error) {
+            console.error("pipe_message: Failed to connect to Python script:", port.error.message);
+        }
+    });
+
+
 	port.postMessage( message );
 });

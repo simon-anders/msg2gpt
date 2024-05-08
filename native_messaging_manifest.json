@@ -1,7 +1,0 @@
-{
-  "name": "process_message.simon_anders",
-  "description": "Receives a message from 'Pipe Message'",
-  "path": "/home/anders/w/msg2gpt/process_message.py",
-  "type": "stdio",
-  "allowed_extensions": ["pipe-message@simon-anders"]
-}

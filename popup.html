@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+  .menu-option {
+    padding: 10px;
+    margin: 5px 0; /* removes indent */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .menu-option:hover {
+    background-color: #e0e0e0;
+  }
+</style>
+</head>
 <body>
-  <div id="messageId">piping</div>
-  <ul>
-    <li id="task_alpha">Task Alpha</li>
-    <li id="task_bravo">Task Bravo</li>
-  </ul>
+  <div id="menu-container">
+    <div class="menu-option" id="add_to_calendar">Add to calendar</div>
+    <div class="menu-option" id="write_to_tmp_log">Write to tmp log</div>
+    <div class="menu-option" id="task_c">Task C</div>
+  </div>
   <script type="module" src="popup.js"></script>
 </body>
 </html>
